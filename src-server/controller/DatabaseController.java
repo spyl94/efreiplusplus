@@ -9,8 +9,10 @@ public class DatabaseController
 	
 	private DatabaseController(){
 		try {
+			Class.forName("org.sqlite.JDBC");
 			connect = DriverManager.getConnection(url);
-		} catch (SQLException e) {
+			createDatabase();
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -22,30 +24,38 @@ public class DatabaseController
 		return connect;
 	}
 	
-  public static void main( String args[] ) throws ClassNotFoundException 
+	public void createDatabase() {
+		try {
+			Statement statement = connect.createStatement();
+			statement.setQueryTimeout(30);
+			
+			statement.executeUpdate("create table student (sid integer PRIMARY KEY, sname string)");
+		    statement.executeUpdate("create table teacher (tid integer PRIMARY KEY, tname string)");
+		    statement.executeUpdate("create table major (mid integer PRIMARY KEY, mname string)");
+		    statement.executeUpdate("create table course (cid integer PRIMARY KEY, cname string)");
+			
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+  /*public static void main( String args[] ) throws ClassNotFoundException 
   {
 	  	// load the sqlite-JDBC driver using the current class loader
 	    Class.forName("org.sqlite.JDBC");
+	    
+	    DatabaseController data = new DatabaseController();
+	    
+	    
 	    Connection connection = DatabaseController.getConnection();
-	    
-	    
-	    
-	    
 	    try
 	    {
 	      // create a database connection
-	      connection = DriverManager.getConnection("jdbc:sqlite:efrei.db");
 	      Statement statement = connection.createStatement();
 	      statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
 	      //statement.executeUpdate("drop table student");
-	      statement.executeUpdate("create table student (sid integer PRIMARY KEY AUTOINCREMENT, name string)");
-	      statement.executeUpdate("create table teacher (tid integer PRIMARY KEY AUTOINCREMENT, name string)");
-	      statement.executeUpdate("create table major (mid integer PRIMARY KEY AUTOINCREMENT, name string)");
-	      statement.executeUpdate("create table course (cid integer PRIMARY KEY AUTOINCREMENT, name string)");
-	      
-	      
-	      
 	      statement.executeUpdate("insert into student (name) values('leo')");
 	      //statement.executeUpdate("insert into person values(2, 'yui')");
 	      ResultSet rs = statement.executeQuery("select * from student");
@@ -75,5 +85,5 @@ public class DatabaseController
 	        System.err.println(e);
 	      }
 	    }
-  }
+  }*/
 }

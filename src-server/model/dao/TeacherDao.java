@@ -41,7 +41,7 @@ public class TeacherDao extends Dao<Teacher> {
 				ResultSet.CONCUR_READ_ONLY
 		).executeQuery("SELECT * FROM Teacher WHERE sid = " + id);
 		if(rs.first())
-			Teacher = new Teacher(id,rs.getString("name"));
+			Teacher = new Teacher(id,rs.getString("tname"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

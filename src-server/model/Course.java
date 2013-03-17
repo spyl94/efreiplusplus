@@ -13,6 +13,10 @@ public abstract class Course implements Serializable{
 	
 	private String name;
 	
+	public Course () {
+		this.name = "unknown";
+	}
+	
 	public Course(String name) {
 		this.name = name;
 	}

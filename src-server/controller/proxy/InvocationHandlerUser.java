@@ -12,7 +12,7 @@ public class InvocationHandlerUser implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args)
-			throws IllegalAccessException {
+			throws IllegalAccessException, Throwable {
 		
 		try {
 			if(method.getName().startsWith("get")) {

@@ -12,14 +12,19 @@ public class InvocationHandlerAnonymous implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args)
-			throws IllegalAccessException {
+			throws IllegalAccessException, Throwable {
 		
 		try {
-			if(method.getName().equals("connection")) {
+			try {
+				return method.invoke(controller, args);
+			} catch (InvocationTargetException e) {
+				throw e.getCause();
+			}
+			/*if(method.getName().equals("connection")) {
 				return method.invoke(controller, args);
 			} else {
 				throw new IllegalAccessException();
-			}
+			}*/
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}

@@ -39,7 +39,21 @@ public class MainController {
 	
 
 	public static void main(String[] args) {
-		MainController.getInstance();
+		MainController.getInstance().init(args);
+		
+	}
+	
+	public void init(String[] args) {
+		try {
+		    
+			remote.addStudent("bidule");
+			remote.getStudents();
+			remote.removeStudent(1);
+			remote.getStudents();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private Hashtable<String, Course> courses;
