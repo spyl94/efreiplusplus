@@ -48,7 +48,6 @@ public class MainController {
 		    
 			remote.addStudent("bidule");
 			remote.getStudents();
-			remote.removeStudent(1);
 			remote.getStudents();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -40,7 +40,7 @@ public class CourseDao extends Dao<Course> {
 		ResultSet rs = this.conn.createStatement(
 				ResultSet.TYPE_SCROLL_INSENSITIVE,
 				ResultSet.CONCUR_READ_ONLY
-		).executeQuery("SELECT * FROM Course WHERE sid = " + id);
+		).executeQuery("SELECT * FROM courses WHERE cid = " + id);
 		if(rs.first())
 			course = new LectureCourse();
 			course = new OptionalCourse();

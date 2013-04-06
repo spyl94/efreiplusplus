@@ -28,5 +28,12 @@ public class DaoFactory {
 	public static Dao<?> getCourseDao(){
 		return new CourseDao(conn);
 	}
+	
+	/**
+	* @return DAO
+	*/
+	public static Dao<?> getMarkDao(){
+		return new MarkDao(conn);
+	}
 
 }

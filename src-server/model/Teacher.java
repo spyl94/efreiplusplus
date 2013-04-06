@@ -20,4 +20,12 @@ public class Teacher implements Serializable {
 		this.id = 0;
 		this.name = "unknown";
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
 }

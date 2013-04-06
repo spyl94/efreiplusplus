@@ -14,7 +14,7 @@ public class Mark implements Serializable {
 	private int mark;
 	private Student student;
 	
-	public Mark(Course cours, int mark, Student student) {
+	public Mark(Student student, Course cours, int mark) {
 		this.cours = cours;
 		this.mark = mark;
 		this.student = student;

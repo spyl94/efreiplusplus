@@ -5,8 +5,10 @@ import java.util.Set;
 
 import model.Course;
 import model.Major;
+import model.Mark;
 import model.Student;
 import model.dao.DaoFactory;
+import model.dao.MarkDao;
 import model.dao.StudentDao;
 
 public class StudentController {
@@ -14,6 +16,7 @@ public class StudentController {
 	private static StudentController controller;
 	private Hashtable<Integer, Student> students;
 	private StudentDao dao = (StudentDao) DaoFactory.getStudentDao();
+	private MarkDao mark = (MarkDao) DaoFactory.getMarkDao();
 	
 	/**
 	 * The only constructor, the private no-argument constructor, can only be
@@ -51,9 +54,15 @@ public class StudentController {
 			
 	}
 	
+	public boolean addMark(Student s, Course c, int mark) {
+		if(mark >= 0 && mark <= 20) {
+			return mark.create(new Mark(s,c,mark));
+		}
+		return false;
+	}
+	
 	public Set<Student> getStudents() {
-		dao.findAll();
-		return null;
+		return dao.findAll();
 	}
 	
 	public boolean addStudent(String name) {
