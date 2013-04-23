@@ -88,8 +88,8 @@ public class CourseDao extends Dao<Course> {
             ResultSet rs = statement.executeQuery("select * from courses");
             set = new HashSet<Course>();
             while (rs.next()) {
-                if(rs.getString("ctype").equals("lecture"))  set.add(new LectureCourse(rs.getInt("id"),rs.getString("cname")));
-                else set.add(new OptionalCourse(rs.getInt("id"),rs.getString("cname")));
+                if(rs.getString("ctype").equals("lecture"))  set.add(new LectureCourse(rs.getInt("cid"),rs.getString("cname")));
+                else set.add(new OptionalCourse(rs.getInt("cid"),rs.getString("cname")));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
