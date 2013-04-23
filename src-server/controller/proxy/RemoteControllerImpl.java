@@ -39,6 +39,7 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
         user = u;
     }
     
+    @Override
     public User getUser() {
         return user;
     }
@@ -46,6 +47,8 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
     public void setGranted(ROLE r) {
         role = r;
     }
+    
+    @Override
     public ROLE getGranted() {
         return role;
     }

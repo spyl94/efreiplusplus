@@ -53,4 +53,6 @@ public interface RemoteController extends Remote {
     // Other
     public RemoteController login(String user, String pass) throws RemoteException;
     public RemoteController logout() throws RemoteException;
+    public User getUser();
+    public ROLE getGranted();
 }
