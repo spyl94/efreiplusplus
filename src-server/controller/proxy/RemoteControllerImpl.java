@@ -4,6 +4,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Set;
 
+import controller.CourseController;
+import controller.DatabaseController;
+import controller.MainController;
 import controller.StudentController;
 import controller.TeacherController;
 
@@ -12,95 +15,136 @@ import model.Major;
 import model.Mark;
 import model.Student;
 import model.Teacher;
+import model.User;
 
 public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteController {
 
-	StudentController student;
-	TeacherController teacher;
-	
-	
-	public RemoteControllerImpl() throws RemoteException {
-		student = StudentController.getInstance();
-		teacher = TeacherController.getInstance();
-	}
+    StudentController student;
+    TeacherController teacher;
+    CourseController course;
+    User user;
+    ROLE role;
+    
+
+    public RemoteControllerImpl() throws RemoteException {
+        DatabaseController.getConnection();
+        student = StudentController.getInstance();
+        teacher = TeacherController.getInstance();
+        course = CourseController.getInstance();
+        user = null;
+        role = ROLE.ANONYMOUS;
+    }
+    
+    public void setUser(User u) {
+        user = u;
+    }
+    
+    public User getUser() {
+        return user;
+    }
+    
+    public void setGranted(ROLE r) {
+        role = r;
+    }
+    public ROLE getGranted() {
+        return role;
+    }
+
+    @Override
+    public Set<Teacher> getTeachers() {
+        return teacher.getTeachers();
+    }
+
+    @Override
+    public boolean addTeacher(String name) {
+        return teacher.addTeacher(name);
+    }
+
+    @Override
+    public Set<Student> getStudents() throws RemoteException {
+        return student.getStudents();
+    }
+
+    @Override
+    public boolean addStudent(String name) throws RemoteException {
+        return student.addStudent(name);
+    }
+
+    @Override
+    public boolean removeTeacher(Teacher t) throws RemoteException {
+        return teacher.removeTeacher(t);
+    }
+
+    @Override
+    public boolean addTeacherCourse(Teacher t, Course c) throws RemoteException {
+        return teacher.addCourse(t, c);
+    }
+
+    @Override
+    public boolean addStudentCourse(Student s, Course c) throws RemoteException {
+        return student.addCourse(s, c);
+    }
+
+    @Override
+    public boolean addStudentMajor(Student s, Major m) throws RemoteException {
+        return student.setMajor(s, m);
+    }
+
+    @Override
+    public Set<Mark> getStudentMark(Student s) throws RemoteException {
+        return student.getMark(s);
+    }
+
+    @Override
+    public boolean removeStudent(Student s) throws RemoteException {
+        return student.removeStudent(s);
+    }
+
+    @Override
+    public boolean addCourse(String name) throws RemoteException {
+        return course.addCourse(name);
+    }
+
+    @Override
+    public Set<Course> getCourses() throws RemoteException {
+        return course.getCourses();
+    }
+
+    @Override
+    public boolean addMark(Student s, Course c, int mark) throws RemoteException {
+        return student.addMark(s, c, mark);
+    }
+
+    @Override
+    public Set<Course> getTeacherCourse(Teacher t) throws RemoteException {
+        return teacher.getCourse(t);
+    }
+
+    @Override
+    public boolean addTutorStudent(Teacher t, Student s) throws RemoteException {
+        return teacher.addStudentForTutor(t, s);
+    }
+
+    @Override
+    public Set<Student> getStudentsFromTutor(Teacher t) throws RemoteException {
+        return teacher.getStudentFromTutor(t);
+    }
+
+    @Override
+    public Set<Major> getMajors() throws RemoteException {
+        return course.getMajors();
+    }
 
 	@Override
-	public Set<Teacher> getTeachers() {
-		return teacher.getTeachers();
-	}
-
-	@Override
-	public boolean addTeacher(String name) {
-		return teacher.addTeacher(name);
-	}
-
-	@Override
-	public boolean connection(String user, String pass) {
-		return true;
-	}
-
-	@Override
-	public Set<Student> getStudents() throws RemoteException {
-		return student.getStudents();
-	}
-
-	@Override
-	public boolean addStudent(String name) throws RemoteException {
-		return student.addStudent(name);
-	}
-
-	@Override
-	public boolean removeTeacher(Teacher t) throws RemoteException {
-		return teacher.removeTeacher(t);
-	}
-
-	@Override
-	public boolean addTeacherCourse(Teacher t, Course c) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addStudentCourse(Student s, Course c) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addStudentMajor(Student s, Major m) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Set<Mark> getStudentMark(Student s) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean removeStudent(Student s) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addCourse(String name) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Set<Course> getCourses() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean addMark(Student s, Course c, int mark)
+	public RemoteController login(String user, String pass)
 			throws RemoteException {
+		return MainController.getInstance().getProxy(user, pass);
+	}
+
+	@Override
+	public RemoteController logout() throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }

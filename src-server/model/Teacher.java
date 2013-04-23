@@ -1,31 +1,31 @@
 package model;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.io.Serializable;
 
-public class Teacher implements Serializable {
-	
-	private String name;
-	private int id;
-	private Set<Course> courses;
-	
-	public Teacher(int id, String name) {
-		this.name = name;
-		this.id = id;
-		courses = new HashSet<Course>();
-	}
-	
-	public Teacher() {
-		this.id = 0;
-		this.name = "unknown";
-	}
+public class Teacher extends User implements Serializable {
 
-	public int getId() {
-		return id;
-	}
+    private String name;
+    private int id;
 
-	public String getName() {
-		return name;
-	}
+    public Teacher(int id, String name) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public Teacher() {
+        this.id = 0;
+        this.name = "unknown";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
+    public boolean equals(Teacher t) {
+        return this.id == t.getId();
+    }
 }

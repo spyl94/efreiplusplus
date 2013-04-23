@@ -1,29 +1,31 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class Major implements Serializable {
-	private Set<Course> courses;
-	String name;
-	
-	public Major() {
-		courses = new HashSet<Course>();
-	}
-	
-	public Major(String name) {
-		super();
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public boolean equals(Major m) {
-		return this.name.equals(m.getName());
-	}
- }
+    private int id;
+    private String name;
+
+    public Major() {
+        id = 0;
+        name = "unknown";
+    }
+
+    public Major(int id, String name) {
+        super();
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public boolean equals(Major m) {
+        return this.id == m.getId();
+    }
+}
