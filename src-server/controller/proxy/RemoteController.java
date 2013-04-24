@@ -43,6 +43,7 @@ public interface RemoteController extends Remote {
     
     // Course
     public Set<Course> getCourses() throws RemoteException;
+    public Set<Student> getCourseStudent(Course c) throws RemoteException;
     public Set<Major> getMajors() throws RemoteException;
     
     // Mark

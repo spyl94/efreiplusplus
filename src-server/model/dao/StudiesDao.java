@@ -15,9 +15,12 @@ import model.Course;
 public class StudiesDao extends Dao<Pair<Student, Course>> {
 
     private CourseDao course;
+    private StudentDao student;
+    
     public StudiesDao(Connection conn) {
         super(conn);
         course = (CourseDao) DaoFactory.getCourseDao();
+        student = (StudentDao) DaoFactory.getStudentDao();
     }
 
     @Override
@@ -79,6 +82,21 @@ public class StudiesDao extends Dao<Pair<Student, Course>> {
             set = new HashSet<Course>();
             while (rs.next()) {
                 set.add(course.find(rs.getInt("cid")));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return set;
+    }
+    
+    public Set<Student> getStudentByCourse(Course c) {       
+        Set<Student> set = null;
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("select * from studies where cid = " + c.getId());
+            set = new HashSet<Student>();
+            while (rs.next()) {
+                set.add(student.find(rs.getInt("sid")));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

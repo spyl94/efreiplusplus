@@ -156,4 +156,9 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
 		return student.getCourse(s);
 	}
 
+	@Override
+	public Set<Student> getCourseStudent(Course c) throws RemoteException {
+		return course.getStudent(c);
+	}
+
 }

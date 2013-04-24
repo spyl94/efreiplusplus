@@ -10,6 +10,7 @@ import model.Student;
 import model.dao.DaoFactory;
 import model.dao.MajorDao;
 import model.dao.CourseDao;
+import model.dao.StudiesDao;
 
 public class CourseController {
 
@@ -17,6 +18,7 @@ public class CourseController {
     private Hashtable<Integer, Course> Courses;
     private CourseDao dao = (CourseDao) DaoFactory.getCourseDao();
     private MajorDao majordao = (MajorDao) DaoFactory.getMajorDao();
+    private StudiesDao studiesdao= (StudiesDao) DaoFactory.getStudiesDao();
 
     /**
      * The only constructor, the private no-argument constructor, can only be
@@ -53,6 +55,10 @@ public class CourseController {
 
     public boolean removeCourse(Course c) {
         return dao.delete(c);
+    }
+    
+    public Set<Student>  getStudent(Course c) {
+    	return studiesdao.getStudentByCourse(c);
     }
     
     public Set<Major> getMajors() {
