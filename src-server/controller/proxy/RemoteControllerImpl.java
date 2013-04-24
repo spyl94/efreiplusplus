@@ -1,6 +1,7 @@
 package controller.proxy;
 
 import java.rmi.RemoteException;
+
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Set;
 
@@ -16,7 +17,6 @@ import model.Mark;
 import model.Student;
 import model.Teacher;
 import model.User;
-import model.dao.StudiesDao;
 
 public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteController {
 
@@ -24,9 +24,9 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
     TeacherController teacher;
     CourseController course;
     User user;
+    
     ROLE role;
     
-
     public RemoteControllerImpl() throws RemoteException {
         DatabaseController.getConnection();
         student = StudentController.getInstance();

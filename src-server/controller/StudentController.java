@@ -56,7 +56,7 @@ public class StudentController extends Observable {
         if (s != null && course != null) {
             if (course.isLecture() && s.getMajor() != null && s.getMajor() == course.getMajor())
                 studiesdao.create(new Pair<Student,Course>(s,course));
-                
+    
         }
         return false;
     }

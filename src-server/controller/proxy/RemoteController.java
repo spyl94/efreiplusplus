@@ -7,10 +7,7 @@ import java.util.Set;
 import model.*;
 
 public interface RemoteController extends Remote {
-    
-    public enum ROLE {
-        ANONYMOUS, ADMIN, STUDENT, TEACHER
-    }
+   
     
     // Teacher
     public Set<Teacher> getTeachers() throws RemoteException;
@@ -55,6 +52,6 @@ public interface RemoteController extends Remote {
     // Other
     public RemoteController login(String user, String pass) throws RemoteException;
     public RemoteController logout() throws RemoteException;
-    public User getUser();
-    public ROLE getGranted();
+    public User getUser() throws RemoteException;
+    public ROLE getGranted() throws RemoteException;
 }

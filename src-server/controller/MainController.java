@@ -13,7 +13,7 @@ import controller.proxy.InvocationHandlerStudent;
 import controller.proxy.InvocationHandlerTeacher;
 import controller.proxy.RemoteController;
 import controller.proxy.RemoteControllerImpl;
-import controller.proxy.RemoteController.ROLE;
+import controller.proxy.ROLE;
 
 import model.*;
 import model.dao.DaoFactory;
