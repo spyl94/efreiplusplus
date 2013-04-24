@@ -60,6 +60,8 @@ public class StudentController extends Observable {
         }
         return false;
     }
+    
+    
 
     public boolean addMark(Student s, Course c, int mark) {
         if ((mark >= 0 && mark <= 20) && s != null && c != null) {
@@ -88,5 +90,10 @@ public class StudentController extends Observable {
     public boolean removeStudent(Student s) {
         return dao.delete(s) && studiesdao.delete(s);
     }
+
+	public Set<Course> getCourse(Student s) {
+		return studiesdao.getCourseByStudent(s);
+	}
+
 
 }

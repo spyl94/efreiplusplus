@@ -37,6 +37,8 @@ public interface RemoteController extends Remote {
     public boolean addStudentMajor(Student s, Major m) throws RemoteException;
 
     public Set<Mark> getStudentMark(Student s) throws RemoteException;
+    
+    public Set<Course> getStudentCourse(Student s) throws RemoteException;
 
     public boolean removeStudent(Student s) throws RemoteException;
 

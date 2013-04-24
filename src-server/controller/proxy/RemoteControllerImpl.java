@@ -16,6 +16,7 @@ import model.Mark;
 import model.Student;
 import model.Teacher;
 import model.User;
+import model.dao.StudiesDao;
 
 public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteController {
 
@@ -148,6 +149,11 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
 	public RemoteController logout() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Set<Course> getStudentCourse(Student s) throws RemoteException {
+		return student.getCourse(s);
 	}
 
 }
