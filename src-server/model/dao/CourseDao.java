@@ -10,6 +10,7 @@ import java.util.Set;
 
 import model.Course;
 import model.LectureCourse;
+import model.Major;
 import model.OptionalCourse;
 
 public class CourseDao extends Dao<Course> {
@@ -86,6 +87,22 @@ public class CourseDao extends Dao<Course> {
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("select * from courses");
+            set = new HashSet<Course>();
+            while (rs.next()) {
+                if(rs.getString("ctype").equals("lecture"))  set.add(new LectureCourse(rs.getInt("cid"),rs.getString("cname")));
+                else set.add(new OptionalCourse(rs.getInt("cid"),rs.getString("cname")));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return set;
+    }
+    
+    public Set<Course> findByMajor(Major m) {
+        Set<Course> set = null;
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("select * from courses where mid = " + m.getId());
             set = new HashSet<Course>();
             while (rs.next()) {
                 if(rs.getString("ctype").equals("lecture"))  set.add(new LectureCourse(rs.getInt("cid"),rs.getString("cname")));

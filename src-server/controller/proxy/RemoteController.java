@@ -46,8 +46,11 @@ public interface RemoteController extends Remote {
     
     // Course
     public Set<Course> getCourses() throws RemoteException;
+    public Set<Course> getCoursesByMajor(Major m) throws RemoteException;
     public Set<Student> getCourseStudent(Course c) throws RemoteException;
     public Set<Major> getMajors() throws RemoteException;
+    public boolean addMajor(String name) throws RemoteException;
+    public boolean removeMajor(Major m) throws RemoteException;
     
     // Mark
     public boolean addMark(Student s, Course c, int mark) throws RemoteException;

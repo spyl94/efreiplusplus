@@ -49,6 +49,18 @@ public class CourseController {
     public Set<Course> getCourses() {
         return dao.findAll();
     }
+    
+    public Set<Course> getCourseByMajor(Major m) {
+    	return dao.findByMajor(m);
+    }
+    
+    public boolean addMajor(String name) {
+    	return majordao.create(new Major((int) (Math.random() * 10000) + 20, name));
+    }
+    
+    public boolean removeMajor(Major m) {
+    	return majordao.delete(m);
+    }
 
     public boolean addCourse(String name, Major m) {
         if(m != null) return dao.create(new LectureCourse((int) (Math.random() * 10000) + 20, name, m));

@@ -166,4 +166,19 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
 		return student.removeCourseToStudent(s,c);
 	}
 
+	@Override
+	public Set<Course> getCoursesByMajor(Major m) throws RemoteException {
+		return course.getCourseByMajor(m);
+	}
+
+	@Override
+	public boolean addMajor(String name) throws RemoteException {
+		return course.addMajor(name);
+	}
+
+	@Override
+	public boolean removeMajor(Major m) throws RemoteException {
+		return course.removeMajor(m);
+	}
+
 }
