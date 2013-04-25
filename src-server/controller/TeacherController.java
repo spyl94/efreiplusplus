@@ -20,7 +20,7 @@ public class TeacherController implements Observer {
 
     private static TeacherController controller;
     Observable observable;
-    HashMap<Student,Integer> alert;
+    HashMap<Integer,Integer> alert;
     private TeacherDao dao = (TeacherDao) DaoFactory.getTeacherDao();
     private TeachesDao teachesdao = (TeachesDao) DaoFactory.getTeachesDao();
     private TutorsDao tutorsdao = (TutorsDao) DaoFactory.getTutorsDao();
@@ -36,7 +36,7 @@ public class TeacherController implements Observer {
             controller = this;
             observable = StudentController.getInstance();
             observable.addObserver(this);
-            alert = new HashMap<Student, Integer>();
+            alert = new HashMap<Integer, Integer>();
         }
         else
             throw new IllegalArgumentException("Default constructor called more than once.");
@@ -97,14 +97,14 @@ public class TeacherController implements Observer {
     @Override
     public void update(Observable obs, Object arg) {
         if (obs instanceof StudentController && arg instanceof Student) {
-            if(alert.containsKey(arg)) {
-                alert.put((Student) arg, alert.get(arg)+1);
-                if(alert.get(arg) == 3) {
+            if(alert.containsKey(((Student)arg).getId())) {
+                alert.put(((Student)arg).getId(), alert.get(((Student)arg).getId())+1);
+                if(alert.get(((Student)arg).getId()) == 3) {
                 	StudentController.getInstance().setAlerted((Student)arg);               
-                    alert.remove(arg);
+                    alert.remove(((Student)arg).getId());
                 }
             } else
-                alert.put((Student) arg, 1);
+                alert.put(((Student)arg).getId(), 1);
         }
     }
 
