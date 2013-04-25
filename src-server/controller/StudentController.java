@@ -88,6 +88,7 @@ public class StudentController extends Observable {
 
     public boolean addStudent(String name) {
         Student s = new Student((int) (Math.random() * 10000) + 20, name);
+        s.setMajor(new Major());
         userdao.create(new User(s.getName(),s.getName(),s.getId(),0));
         return dao.create(s);
     }
