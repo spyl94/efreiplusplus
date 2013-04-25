@@ -47,10 +47,11 @@ public class StudentDao extends Dao<Student> {
     @Override
     public boolean update(Student obj) {
         try {
-            String req = "update students set sname = ?, mid = ? where sid = " + obj.getId();
+            String req = "update students set sname = ?, mid = ?, isAlert = ? where sid = " + obj.getId();
             PreparedStatement updateStudent = conn.prepareStatement(req);
             updateStudent.setString(1, obj.getName());
             updateStudent.setInt(2, obj.getMajor().getId());
+            updateStudent.setBoolean(3, obj.isAlerted());
             return updateStudent.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +64,7 @@ public class StudentDao extends Dao<Student> {
         Student student = null;
         try {
             ResultSet rs = this.conn.createStatement().executeQuery("SELECT * FROM students WHERE sid = " + id);
-                student = new Student(id, rs.getString("sname"), daomajor.find(rs.getInt("mid")));
+                student = new Student(id, rs.getString("sname"), daomajor.find(rs.getInt("mid")),rs.getBoolean("isAlert"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,7 +79,7 @@ public class StudentDao extends Dao<Student> {
             ResultSet rs = statement.executeQuery("select * from students");
             set = new HashSet<Student>();
             while (rs.next()) {
-                set.add(new Student(rs.getInt("sid"), rs.getString("sname"), daomajor.find(rs.getInt("mid"))));
+                set.add(new Student(rs.getInt("sid"), rs.getString("sname"), daomajor.find(rs.getInt("mid")), rs.getBoolean("isAlert")));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

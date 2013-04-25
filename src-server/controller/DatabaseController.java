@@ -25,7 +25,7 @@ public class DatabaseController {
     private String url = "jdbc:sqlite:efrei.db";
     private static Connection connect;
 
-    public static final String STUDENTS = "create table students (sid integer PRIMARY KEY, sname string, mid integer, FOREIGN KEY(mid) REFERENCES majors(mid))";
+    public static final String STUDENTS = "create table students (sid integer PRIMARY KEY, sname string, mid integer, isAlert boolean, FOREIGN KEY(mid) REFERENCES majors(mid))";
     public static final String TEACHERS = "create table teachers (tid integer PRIMARY KEY, tname string)";
     public static final String MAJORS = "create table majors (mid integer PRIMARY KEY, mname string)";
     public static final String COURSES = "create table courses (cid integer PRIMARY KEY, mid integer, cname string, ctype string, FOREIGN KEY(mid) REFERENCES majors(mid))";

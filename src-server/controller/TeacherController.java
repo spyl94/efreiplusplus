@@ -84,7 +84,7 @@ public class TeacherController implements Observer {
             if(alert.containsKey(arg)) {
                 alert.put((Student) arg, alert.get(arg)+1);
                 if(alert.get(arg) == 3) {
-                    //alerter tuteur
+                	StudentController.getInstance().setAlerted((Student)arg);               
                     alert.remove(arg);
                 }
             } else

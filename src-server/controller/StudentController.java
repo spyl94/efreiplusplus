@@ -61,7 +61,10 @@ public class StudentController extends Observable {
         return false;
     }
     
-    
+    public boolean setAlerted(Student s) {
+    	s.setAlerted();
+    	return dao.update(s);
+    }
 
     public boolean addMark(Student s, Course c, int mark) {
         if ((mark >= 0 && mark <= 20) && s != null && c != null) {
