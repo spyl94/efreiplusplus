@@ -55,6 +55,13 @@ public class TeacherController implements Observer {
         return false;
     }
     
+    public boolean removeCourse(Teacher t, Course course) {
+        if (t != null && course != null) {
+            return teachesdao.delete(new Pair<Teacher, Course>(t, course));
+        }
+        return false;
+    }
+    
     public Set<Course> getCourse(Teacher t) {
         return teachesdao.getCourseByTeacher(t);
     }
