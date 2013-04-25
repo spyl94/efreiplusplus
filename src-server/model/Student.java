@@ -12,6 +12,12 @@ public class Student extends User implements Serializable {
         this.id = id;
         this.name = name;
     }
+    
+    public Student(int id, String name, Major major) {
+        this.id = id;
+        this.name = name;
+        this.major = major;
+    }
 
     public Student() {
         this.id = 0;

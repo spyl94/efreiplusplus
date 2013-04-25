@@ -86,21 +86,14 @@ public class MainController {
 	}
 
 	public RemoteController getProxy(String login, String pass) {
-		ROLE granted = ROLE.ADMIN;
 		User u = userdao.findByLoginAndPass(login, pass);
+		if (u == null) return getProxyAnonymous(remote);
 		try {
 			remote = new RemoteControllerImpl();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		if (granted == ROLE.ADMIN ) {
-			try {
-			    remote.setGranted(ROLE.ADMIN);
-				return getProxyAdmin(remote);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (granted == ROLE.STUDENT) {
+		if (u instanceof Student) {
 			try {
 			    remote.setGranted(ROLE.STUDENT);
 			    remote.setUser(u);
@@ -109,11 +102,19 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
-		else if (granted == ROLE.TEACHER) {
+		else if (u instanceof Teacher) {
 			try {
 			    remote.setGranted(ROLE.TEACHER);
 			    remote.setUser(u);
 				return getProxyTeacher(remote);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+			    remote.setGranted(ROLE.ADMIN);
+				return getProxyAdmin(remote);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

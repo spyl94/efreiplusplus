@@ -12,6 +12,7 @@ import model.Student;
 
 public class StudentDao extends Dao<Student> {
 
+	MajorDao daomajor = (MajorDao) DaoFactory.getMajorDao();
     public StudentDao(Connection conn) {
         super(conn);
     }
@@ -62,7 +63,7 @@ public class StudentDao extends Dao<Student> {
         Student student = null;
         try {
             ResultSet rs = this.conn.createStatement().executeQuery("SELECT * FROM students WHERE sid = " + id);
-                student = new Student(id, rs.getString("sname"));
+                student = new Student(id, rs.getString("sname"), daomajor.find(rs.getInt("mid")));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,7 +78,7 @@ public class StudentDao extends Dao<Student> {
             ResultSet rs = statement.executeQuery("select * from students");
             set = new HashSet<Student>();
             while (rs.next()) {
-                set.add(new Student(rs.getInt("sid"), rs.getString("sname")));
+                set.add(new Student(rs.getInt("sid"), rs.getString("sname"), daomajor.find(rs.getInt("mid"))));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
