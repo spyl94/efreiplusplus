@@ -98,5 +98,9 @@ public class StudentController extends Observable {
 		return studiesdao.getCourseByStudent(s);
 	}
 
+	public boolean removeCourseToStudent(Student s, Course c) {
+		return studiesdao.delete(new Pair<Student,Course>(s,c));
+	}
+
 
 }

@@ -30,6 +30,8 @@ public interface RemoteController extends Remote {
     public boolean addStudent(String name) throws RemoteException;
 
     public boolean addStudentCourse(Student s, Course c) throws RemoteException;
+    
+    public boolean removeStudentCourse(Student s, Course c) throws RemoteException;
 
     public boolean addStudentMajor(Student s, Major m) throws RemoteException;
 
@@ -39,7 +41,8 @@ public interface RemoteController extends Remote {
 
     public boolean removeStudent(Student s) throws RemoteException;
 
-    public boolean addCourse(String name) throws RemoteException;
+    public boolean addCourse(String name, Major m) throws RemoteException;
+
     
     // Course
     public Set<Course> getCourses() throws RemoteException;

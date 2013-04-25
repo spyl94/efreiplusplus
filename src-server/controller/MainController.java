@@ -45,15 +45,6 @@ public class MainController {
 	}
 
 	public void init(String[] args) {
-		System.out.println("init");
-		try {
-			remote.addMark(new Student(), new LectureCourse(), 2);
-			remote.addMark(new Student(), new LectureCourse(), 2);
-			remote.addMark(new Student(), new LectureCourse(), 2);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		System.out.println("fin");
 	}
 
 	private RemoteControllerImpl remote;

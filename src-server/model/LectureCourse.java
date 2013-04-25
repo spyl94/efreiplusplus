@@ -11,6 +11,11 @@ public class LectureCourse extends Course {
     public LectureCourse(int id, String name) {
         super(id, name);
     }
+    
+    public LectureCourse(int id, String name, Major m) {
+        super(id, name);
+        major = m;
+    }
 
     @Override
     public boolean isLecture() {

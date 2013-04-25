@@ -105,8 +105,8 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
     }
 
     @Override
-    public boolean addCourse(String name) throws RemoteException {
-        return course.addCourse(name);
+    public boolean addCourse(String name, Major m) throws RemoteException {
+        return course.addCourse(name,m);
     }
 
     @Override
@@ -147,8 +147,7 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
 
 	@Override
 	public RemoteController logout() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return MainController.getInstance().getProxy("","");
 	}
 
 	@Override
@@ -159,6 +158,12 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
 	@Override
 	public Set<Student> getCourseStudent(Course c) throws RemoteException {
 		return course.getStudent(c);
+	}
+
+	@Override
+	public boolean removeStudentCourse(Student s, Course c)
+			throws RemoteException {
+		return student.removeCourseToStudent(s,c);
 	}
 
 }

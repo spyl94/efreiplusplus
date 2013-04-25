@@ -6,6 +6,7 @@ import java.util.Set;
 import model.Course;
 import model.LectureCourse;
 import model.Major;
+import model.OptionalCourse;
 import model.Student;
 import model.dao.DaoFactory;
 import model.dao.MajorDao;
@@ -49,8 +50,9 @@ public class CourseController {
         return dao.findAll();
     }
 
-    public boolean addCourse(String name) {
-        return dao.create(new LectureCourse((int) (Math.random() * 10000) + 20, name));
+    public boolean addCourse(String name, Major m) {
+        if(m != null) return dao.create(new LectureCourse((int) (Math.random() * 10000) + 20, name, m));
+        else return dao.create(new OptionalCourse((int) (Math.random() * 10000) + 20, name));
     }
 
     public boolean removeCourse(Course c) {
