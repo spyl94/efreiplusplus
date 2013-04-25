@@ -78,6 +78,11 @@ public class TeacherController implements Observer {
         if (t == null || s == null) return false;
         return tutorsdao.create(new Pair<Teacher, Student>(t,s));
     }
+    
+    public boolean removeStudentForTutor(Teacher t, Student s) {
+        if (t == null || s == null) return false;
+        return tutorsdao.delete(new Pair<Teacher, Student>(t,s));
+    }
 
     public boolean addTeacher(String name) {
         Teacher t = new Teacher((int) (Math.random() * 10000) + 20, name);

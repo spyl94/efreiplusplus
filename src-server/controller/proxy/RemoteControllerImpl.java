@@ -196,4 +196,10 @@ public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteC
 		return teacher.removeCourse(t, c);
 	}
 
+	@Override
+	public boolean removeTutorStudent(Teacher t, Student s)
+			throws RemoteException {
+		return teacher.removeStudentForTutor(t, s);
+	}
+
 }
