@@ -13,7 +13,6 @@ import model.User;
 import model.dao.CourseDao;
 import model.dao.DaoFactory;
 import model.dao.MajorDao;
-import model.dao.MarkDao;
 import model.dao.StudentDao;
 import model.dao.StudiesDao;
 import model.dao.TeacherDao;

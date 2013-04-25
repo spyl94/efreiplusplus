@@ -39,7 +39,7 @@ public class StudentControllerTest {
     @Test
     public void testAddMark() {
         assertTrue(controller.addStudent("testAddMajor"));
-        Iterator i = controller.getStudents().iterator();
+        Iterator<Student> i = controller.getStudents().iterator();
         Student s = null;
         while(i.hasNext())
             s = (Student) i.next();

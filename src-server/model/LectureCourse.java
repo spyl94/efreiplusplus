@@ -2,7 +2,11 @@ package model;
 
 public class LectureCourse extends Course {
 
-    private Major major;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8502141057323439098L;
+	private Major major;
 
     public LectureCourse() {
         super();

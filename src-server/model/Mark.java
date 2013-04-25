@@ -11,7 +11,11 @@ import java.io.Serializable;
  */
 public class Mark implements Serializable {
     
-    private Course cours;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4132519171790602525L;
+	private Course cours;
     private int mark;
     private Student student;
 

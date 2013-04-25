@@ -11,7 +11,11 @@ import java.io.Serializable;
  */
 public abstract class Course implements Serializable {
 
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1805921298064626562L;
+	private String name;
     private int id;
 
     public Course() {

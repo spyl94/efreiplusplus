@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class Teacher extends User implements Serializable {
 
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8714801050597003528L;
+	private String name;
     private int id;
 
     public Teacher(int id, String name) {

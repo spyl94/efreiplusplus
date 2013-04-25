@@ -23,7 +23,7 @@ public class TeacherControllerTest {
     }
     
     private Teacher getLastTeacher() {
-        Iterator i = controller.getTeachers().iterator();
+        Iterator<Teacher> i = controller.getTeachers().iterator();
         Teacher t = null;
         while(i.hasNext())
             t =  (Teacher) i.next();
@@ -42,7 +42,6 @@ public class TeacherControllerTest {
     @Test
     public void testAddCourseTeacher() {
        assertTrue(controller.addTeacher("testAddCourseTeacher"));
-       Iterator i = controller.getTeachers().iterator();
        Teacher t = getLastTeacher();
        assertNotNull(t);
        assertTrue(controller.addCourse(t, new LectureCourse()));

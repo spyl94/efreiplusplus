@@ -3,7 +3,11 @@ package model;
 import java.io.Serializable;
 
 public class Major implements Serializable {
-    private int id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3889951012901259891L;
+	private int id;
     private String name;
 
     public Major() {

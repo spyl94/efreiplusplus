@@ -4,7 +4,11 @@ import java.lang.reflect.*;
 
 public class InvocationHandlerAdmin implements InvocationHandler, java.io.Serializable {
 
-    RemoteController controller;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5706306195076416438L;
+	RemoteController controller;
 
     public InvocationHandlerAdmin(RemoteController controller) {
         this.controller = controller;

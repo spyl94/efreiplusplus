@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class Student extends User implements Serializable {
 
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7557630722984163909L;
+	private String name;
     private int id;
     private Major major;
     private boolean isAlert;

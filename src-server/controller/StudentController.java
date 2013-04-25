@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Set;
 
@@ -19,7 +18,6 @@ import model.dao.UserDao;
 public class StudentController extends Observable {
 
     private static StudentController controller;
-    private Hashtable<Integer, Student> students;
     private StudentDao dao;
     private MarkDao markdao;
     private StudiesDao studiesdao;
@@ -35,7 +33,6 @@ public class StudentController extends Observable {
             controller = this;
         else
             throw new IllegalArgumentException("Default constructor called more than once.");
-        students = new Hashtable<Integer, Student>();
         dao = (StudentDao) DaoFactory.getStudentDao();
         markdao = (MarkDao) DaoFactory.getMarkDao();
         studiesdao = (StudiesDao) DaoFactory.getStudiesDao();

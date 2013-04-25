@@ -20,7 +20,11 @@ import model.User;
 
 public class RemoteControllerImpl extends UnicastRemoteObject implements RemoteController {
 
-    StudentController student;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3441443474490088855L;
+	StudentController student;
     TeacherController teacher;
     CourseController course;
     User user;

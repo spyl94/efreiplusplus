@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Hashtable;
 import java.util.Set;
 
 import model.Course;
@@ -16,7 +15,6 @@ import model.dao.StudiesDao;
 public class CourseController {
 
     private static CourseController controller;
-    private Hashtable<Integer, Course> Courses;
     private CourseDao dao = (CourseDao) DaoFactory.getCourseDao();
     private MajorDao majordao = (MajorDao) DaoFactory.getMajorDao();
     private StudiesDao studiesdao= (StudiesDao) DaoFactory.getStudiesDao();
@@ -31,7 +29,6 @@ public class CourseController {
             controller = this;
         else
             throw new IllegalArgumentException("Default constructor called more than once.");
-        Courses = new Hashtable<Integer, Course>();
     }
 
     public static CourseController getInstance() {
