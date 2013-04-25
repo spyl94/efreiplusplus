@@ -58,7 +58,6 @@ public class UserDao extends Dao<User> {
         try {
             ResultSet rs = this.conn.createStatement().executeQuery(
                     "SELECT * FROM users WHERE login ='" + login +"' AND pass ='"+ pass+"'");
-            
             if(rs.getInt("sid") != 0) {
                 return (Student) DaoFactory.getStudentDao().find(rs.getInt("sid"));
             } else if(rs.getInt("tid") != 0) {
