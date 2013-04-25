@@ -9,10 +9,12 @@ import model.Major;
 import model.Mark;
 import model.Pair;
 import model.Student;
+import model.User;
 import model.dao.DaoFactory;
 import model.dao.MarkDao;
 import model.dao.StudentDao;
 import model.dao.StudiesDao;
+import model.dao.UserDao;
 
 public class StudentController extends Observable {
 
@@ -21,6 +23,7 @@ public class StudentController extends Observable {
     private StudentDao dao;
     private MarkDao markdao;
     private StudiesDao studiesdao;
+    private UserDao userdao;
 
     /**
      * The only constructor, the private no-argument constructor, can only be
@@ -36,6 +39,7 @@ public class StudentController extends Observable {
         dao = (StudentDao) DaoFactory.getStudentDao();
         markdao = (MarkDao) DaoFactory.getMarkDao();
         studiesdao = (StudiesDao) DaoFactory.getStudiesDao();
+        userdao = (UserDao) DaoFactory.getUserDao();
     }
 
     public static StudentController getInstance() {
@@ -87,6 +91,7 @@ public class StudentController extends Observable {
 
     public boolean addStudent(String name) {
         Student s = new Student((int) (Math.random() * 10000) + 20, name);
+        userdao.create(new User(s.getName(),s.getName(),s.getId(),0));
         return dao.create(s);
     }
 

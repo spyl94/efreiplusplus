@@ -9,10 +9,12 @@ import model.Course;
 import model.Pair;
 import model.Student;
 import model.Teacher;
+import model.User;
 import model.dao.DaoFactory;
 import model.dao.TeacherDao;
 import model.dao.TeachesDao;
 import model.dao.TutorsDao;
+import model.dao.UserDao;
 
 public class TeacherController implements Observer {
 
@@ -22,6 +24,7 @@ public class TeacherController implements Observer {
     private TeacherDao dao = (TeacherDao) DaoFactory.getTeacherDao();
     private TeachesDao teachesdao = (TeachesDao) DaoFactory.getTeachesDao();
     private TutorsDao tutorsdao = (TutorsDao) DaoFactory.getTutorsDao();
+    private UserDao userdao = (UserDao) DaoFactory.getUserDao();
 
     /**
      * The only constructor, the private no-argument constructor, can only be
@@ -70,8 +73,9 @@ public class TeacherController implements Observer {
     }
 
     public boolean addTeacher(String name) {
-        Teacher s = new Teacher((int) (Math.random() * 10000) + 20, name);
-        return dao.create(s);
+        Teacher t = new Teacher((int) (Math.random() * 10000) + 20, name);
+        userdao.create(new User(t.getName(),t.getName(),0,t.getId()));
+        return dao.create(t);
     }
 
     public boolean removeTeacher(Teacher t) {
