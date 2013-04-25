@@ -68,7 +68,7 @@ public class CourseController {
     }
 
     public boolean removeCourse(Course c) {
-        return dao.delete(c);
+        return dao.delete(c) && studiesdao.delete(c);
     }
     
     public Set<Student>  getStudent(Course c) {

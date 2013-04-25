@@ -55,6 +55,15 @@ public class StudiesDao extends Dao<Pair<Student, Course>> {
             return false;
         }
     }
+    
+    public boolean delete(Course obj) {
+        try {
+            return !this.conn.createStatement().execute("DELETE FROM studies WHERE cid = " + obj.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     @Override
     public boolean update(Pair<Student, Course> obj) {
