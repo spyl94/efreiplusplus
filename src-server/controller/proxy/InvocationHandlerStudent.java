@@ -20,7 +20,17 @@ public class InvocationHandlerStudent implements InvocationHandler, java.io.Seri
         try {
             if (method.getName().startsWith("get")) {
                 return method.invoke(controller, args);
-            } else {
+            }
+            else if (method.getName().equals("addStudentMajor")){
+            	return method.invoke(controller, args);
+            }
+            else if (method.getName().equals("addStudentCourse")){
+            	return method.invoke(controller, args);
+            }
+            else if (method.getName().equals("removeStudentCourse")){
+            	return method.invoke(controller, args);
+            }
+            else {
                 throw new IllegalAccessException();
             }
         } catch (InvocationTargetException e) {

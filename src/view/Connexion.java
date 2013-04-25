@@ -62,17 +62,9 @@ public class Connexion extends JFrame {
 		valid.addActionListener(new ActionListener(){
 			  public void actionPerformed(ActionEvent arg0){
 				    try {
-				    	MainWindow.getInstance().setStub(MainWindow.getInstance().getStub().login(user.getText(), pwd.getPassword().toString()));
-				    	MainWindow.getInstance().switchPanel("");
-						/*if(temp.equals("admin")){
-							new DialogBox("Great!", "Vous êtes connecté en tant qu'Administateur.");
-						}
-						else if(temp.equals("user")){
-							new DialogBox("Great!", "Vous êtes connecté en tant qu'Utilisateur.");
-						}
-						else{
-							new DialogBox("Attention!", "Problème d'identifiants ou de communication, recommencez.");								
-						}*/
+				    	String pass = new String(pwd.getPassword());
+				    	MainWindow.getInstance().setStub(MainWindow.getInstance().getStub().login(user.getText(), pass));
+				    	MainWindow.getInstance().switchPanel();
 					} catch (RemoteException e) {
 						e.printStackTrace();
 					}

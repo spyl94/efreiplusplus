@@ -29,6 +29,7 @@ public class ViewStudent extends JFrame {
 	private JButton remButton = new JButton("Enlever");
 	private Student actual = null;
 	private Set<Course> courseList;
+	private Set<Course> studentCourse;
 	private JPanel top = new JPanel();
 	private JPanel bot = new JPanel();
 	private JPanel midAdd = new JPanel();
@@ -50,8 +51,9 @@ public class ViewStudent extends JFrame {
 		
 		try {
 			Set<Student> stuList = MainWindow.getInstance().getStub().getStudents();
+			Student test = (Student) MainWindow.getInstance().getStub().getUser();
 			for(Student i : stuList){
-				if (i.getName().equals("Adrien")){
+				if (i.getId() == test.getId()){
 					actual = i;
 				}
 			}
@@ -82,7 +84,20 @@ public class ViewStudent extends JFrame {
 		try {
 			courseList = MainWindow.getInstance().getStub().getCourses();
 			for(Course i : courseList){
-				addCombo.addItem(i.getName());
+				if(!i.isLecture()){
+					addCombo.addItem(i.getName());
+				}
+				
+			}
+			
+			studentCourse = MainWindow.getInstance().getStub().getStudentCourse(actual);
+			for(Course i : studentCourse){
+				System.out.println(i.getId());
+				System.out.println(i.getName());
+				if(!i.isLecture()){
+					remCombo.addItem(i.getName());
+				}
+				
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -93,14 +108,31 @@ public class ViewStudent extends JFrame {
 				    try {
 				    	Course c = null;
 						for(Course i : courseList){
-							if(addButton.getText().equals(i.getName())){
+							if(addCombo.getSelectedItem().equals(i.getName())){
 								c = i;
 							}
 						}
 						
-						//TODO On doit vérifier que le cours n'est pas déjà présent.
+						Boolean pres = false;
 						
-				    	MainWindow.getInstance().getStub().addStudentCourse(actual, c);
+						for(Course i : studentCourse){
+							if(c.equals(i)){
+								pres = true;
+							}
+						}
+
+						if(!pres){
+					    	MainWindow.getInstance().getStub().addStudentCourse(actual, c);
+						}
+						
+						remCombo.removeAllItems();
+						studentCourse = MainWindow.getInstance().getStub().getStudentCourse(actual);
+						for(Course i : studentCourse){
+							if(!i.isLecture()){
+								remCombo.addItem(i.getName());
+							}
+						}
+						
 					} catch (RemoteException e) {
 						e.printStackTrace();
 					}
@@ -108,7 +140,30 @@ public class ViewStudent extends JFrame {
 		});
 		
 		
-		//TODO Ajouter l'autre bouton pour qu'il puisse désinscrire l'élève
+		remButton.addActionListener(new ActionListener(){
+			  public void actionPerformed(ActionEvent arg0){
+				    try {
+				    	Course c = null;
+						for(Course i : courseList){
+							if(remCombo.getSelectedItem().equals(i.getName())){
+								c = i;
+							}
+						}
+					    	MainWindow.getInstance().getStub().removeStudentCourse(actual, c);
+						
+						remCombo.removeAllItems();
+						studentCourse = MainWindow.getInstance().getStub().getStudentCourse(actual);
+						for(Course i : studentCourse){
+							if(!i.isLecture()){
+								remCombo.addItem(i.getName());
+							}
+						}
+						
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+				  }
+		});
 		
 		
 		midAdd.add(addCombo);

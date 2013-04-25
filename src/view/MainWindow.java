@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import view.admin.PopCourseTeacher;
+import view.admin.ViewAdmin;
 import view.student.PopNewStudent;
 import view.student.ViewStudent;
 import view.teacher.ViewTeacher;
@@ -34,6 +36,7 @@ import model.Major;
 import model.Student;
 
 import controller.MainController;
+import controller.proxy.ROLE;
 import controller.proxy.RemoteController;
 
 public class MainWindow  {
@@ -41,6 +44,7 @@ public class MainWindow  {
 	private RemoteController stub;
 	private Registry registry;
 	private Connexion connexionWindow;
+	private PopNewStudent newStudentWindow = null;
 	
 	public static MainWindow getInstance() {
 		if (mainWindow == null)
@@ -56,22 +60,41 @@ public class MainWindow  {
 		stub = newest;
 	}
 	
-	public void switchPanel(String id){
+	public void switchStudent(){
+		newStudentWindow.dispose();
+		new ViewStudent();
+	}
+	public void switchPanel(){
 		connexionWindow.dispose();
-		
-		Set<Student> stuList;
+
 		try {
-			stuList = stub.getStudents();
-			for(Student i : stuList);
-				//if (i.g)
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if(MainWindow.getInstance().getStub().getGranted() == ROLE.STUDENT){
+				Student actual = new Student();
+				Set<Student> students = MainWindow.getInstance().getStub().getStudents();
+				Student test = (Student) MainWindow.getInstance().getStub().getUser();
+				for(Student i : students){
+					if(i.getId() == test.getId()){
+						actual = i;
+					}
+				}
+
+				if(actual.getMajor().getId() == 0){
+					newStudentWindow = new PopNewStudent();
+				}
+				else{
+					new ViewStudent();
+				}
+			}
+			else if(MainWindow.getInstance().getStub().getGranted() == ROLE.TEACHER){
+				new ViewTeacher();
+			}
+			else if(MainWindow.getInstance().getStub().getGranted() == ROLE.ADMIN){
+				new ViewAdmin();
+			}
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
 		}
-		
-		//new PopNewStudent();
-		//new ViewStudent();
-		new ViewTeacher();
+
 	}
 	
 	private MainWindow() {
@@ -89,7 +112,6 @@ public class MainWindow  {
 	        }
 	        
 		 connexionWindow = new Connexion();
-		 //new ViewStudent();
 		 
 	}
 		

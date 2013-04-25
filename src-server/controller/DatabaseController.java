@@ -108,6 +108,7 @@ public class DatabaseController {
         System.out.println("Populating Database ...");
         
         int i = 1;
+        majordao.create(new Major());
         for (String s : POPULATE_MAJORS_NAME) {
             majordao.create(new Major(i, s));
             i++;

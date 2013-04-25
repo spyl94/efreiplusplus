@@ -23,7 +23,6 @@ public class DialogBox extends JFrame {
 		this.setTitle(title);
 		label = new JLabel (msg);
 		this.setSize(35 + msg.length()*8, 100);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		container.setLayout(new BorderLayout());
 		top.add(label);

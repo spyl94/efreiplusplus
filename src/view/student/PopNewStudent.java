@@ -16,7 +16,9 @@ import javax.swing.JPanel;
 import view.MainWindow;
 
 
+import model.Course;
 import model.Major;
+import model.Student;
 
 public class PopNewStudent extends JFrame {
 	JFrame actual = this;
@@ -25,25 +27,24 @@ public class PopNewStudent extends JFrame {
 	private JPanel bot = new JPanel();
 	private JPanel mid = new JPanel();
 	private JButton button = new JButton("Ok");
-
+	private Set<Major> majorList;
+	private JComboBox combo = new JComboBox();
+	
 	public PopNewStudent() {
 		this.setTitle("Choix des matières");
 		this.setSize(400, 150);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		
 		JLabel new1 = new JLabel("Vous n'êtes inscrit à aucune majeure, veuillez vous inscrire.");
 		top.add(new1);
 		container.setLayout(new BorderLayout());
-		
-		Set<Major> majorList;	
-		JComboBox combo = new JComboBox();
+				
 		try {
 			majorList = MainWindow.getInstance().getStub().getMajors();
 			for(Major i : majorList){
+				if(i.getId() != 0)
 				combo.addItem(i.getName());
-				//TODO Modifier majeure de l'étudiant connecté
-				//MainWindow.getInstance().getStub().addStudentMajor(s, m);
+
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -51,7 +52,30 @@ public class PopNewStudent extends JFrame {
 		
 		button.addActionListener(new ActionListener(){
 			  public void actionPerformed(ActionEvent arg0){
-				    actual.dispose();
+					Student newest = null;
+					Set<Student> students;
+					try {
+						students = MainWindow.getInstance().getStub().getStudents();
+
+						Set<Student> stuList = MainWindow.getInstance().getStub().getStudents();
+						Student test = (Student) MainWindow.getInstance().getStub().getUser();
+						for(Student i : stuList){
+							if (i.getId() == test.getId()){
+								newest = i;
+							}
+						}
+					
+			    	Major m = null;
+					for(Major i : majorList){
+						if(combo.getSelectedItem().equals(i.getName())){
+							m = i;
+						}
+					}
+				  	MainWindow.getInstance().getStub().addStudentMajor(newest, m);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+					MainWindow.getInstance().switchStudent();
 				  }
 		});
 		
