@@ -34,7 +34,7 @@ public class MajorDao extends Dao<Major> {
     @Override
     public boolean delete(Major obj) {
         try {
-            return !this.conn.createStatement().execute("DELETE FROM Majors WHERE sid = " + obj.getId());
+            return !this.conn.createStatement().execute("DELETE FROM majors WHERE mid = " + obj.getId());
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
