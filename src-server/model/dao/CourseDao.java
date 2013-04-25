@@ -74,7 +74,7 @@ public class CourseDao extends Dao<Course> {
             ResultSet rs = this.conn.createStatement()
                     .executeQuery("SELECT * FROM courses WHERE cid = " + id);
                 if(rs.getString("ctype").equals("lecture")) course = new LectureCourse(rs.getInt("cid"),rs.getString("cname"));
-                else course = new OptionalCourse();
+                else course = new OptionalCourse(rs.getInt("cid"),rs.getString("cname"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
