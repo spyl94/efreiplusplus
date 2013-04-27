@@ -13,18 +13,18 @@ Un élève peut:
 - Planifier son cursus en s'inscrivant aux matières facultatives ou en s'en désinscrivant.
 
 Un professeur peut:
-•  Connaitre les matières qui lui sont attribués.
-•  Afficher un relevé de note des matières qui lui sont attribués.
-•  Ajouter des notes aux élèves des matières qui lui sont attribués.
-•  Observer les alertes émises automatiquement par les élèves ayant 3 notes en dessous de la moyenne.
+- Connaitre les matières qui lui sont attribués.
+- Afficher un relevé de note des matières qui lui sont attribués.
+- Ajouter des notes aux élèves des matières qui lui sont attribués.
+- Observer les alertes émises automatiquement par les élèves ayant 3 notes en dessous de la moyenne.
 
 Un administrateur peut:
-•  Ajouter et retirer des élèves du système.
-•  Ajouter et retirer des professeurs du système.
-•	 Attribuer des matières aux professeurs.
-•	 Attribuer des élèves aux professeurs tuteurs.
-•  Ajouter et retirer des majeures du système.
-•  Ajouter et retirer des cours, en précisant à quelle majeur ils appartiennent (pouvant être catégorisé optionnels).
+- Ajouter et retirer des élèves du système.
+- Ajouter et retirer des professeurs du système.
+- Attribuer des matières aux professeurs.
+- Attribuer des élèves aux professeurs tuteurs.
+- Ajouter et retirer des majeures du système.
+- Ajouter et retirer des cours, en précisant à quelle majeur ils appartiennent (pouvant être catégorisé optionnels).
 
 Un professeur (le tuteur) est alerté lorsqu'un étudiant a reçu 3 notes inférieures à la moyenne.
 
