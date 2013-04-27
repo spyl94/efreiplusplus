@@ -44,13 +44,13 @@ distance entre le client et le serveur.
 Couplé au design pattern proxy de protection, RMI permet de faire une application réseau multi-utilisateur pouvant gérer des droits d’accès.
 
 Nous avons alors réalisé différents InvocationHandler:
-  InvocationHandlerAnonymous: lorsque le client est inconnu celui-ci peut seulement appeler la méthode login.
-  InvocationHandlerStudent: le client a été identifié comme étudiant, celui-ci peut appeler les méthodes permettant de choisir ses cours et afficher ses notes.
-  InvocationHandlerTeacher: le client a été identifié comme professeur, celui-ci peut appeler les méthodes pour ajouter des notes, pour ces cours.
-  InvocationHandlerAdmin: celui-ci peut appeler toutes les méthodes.
+- InvocationHandlerAnonymous: lorsque le client est inconnu celui-ci peut seulement appeler la méthode login.
+- InvocationHandlerStudent: le client a été identifié comme étudiant, celui-ci peut appeler les méthodes permettant de choisir ses cours et afficher ses notes.
+- InvocationHandlerTeacher: le client a été identifié comme professeur, celui-ci peut appeler les méthodes pour ajouter des notes, pour ces cours.
+- InvocationHandlerAdmin: celui-ci peut appeler toutes les méthodes.
   
 Si une méthode est appelé alors que le client n'a pas les droits (un étudiant qui modifierais les notes d'un autre étudiant ou tentative de piratage), alors le serveur
-renvoi une IllegalAccessException.
+renvoi une **IllegalAccessException**.
 
 Par défaut le client se connecte via RMI via l'interface RemoteController avec le proxy InvocationHandlerAnonymous, ensuite la méthode de login retourne au client un RemoteController avec le proxy associé à ses droits d'utilisateur.
 
