@@ -7,10 +7,10 @@ La sécurité a été mise en avant puisque toutes les vérifications s'effectue
 ## Fonctions développées 
 
 Un élève peut:
- - Connaitre sa majeure.
- - Choisir une majeure si c'est sa première connexion.
- - Consulter uniquement ses notes.
- - Planifier son cursus en s'inscrivant aux matières facultatives ou en s'en désinscrivant.
+- Connaitre sa majeure.
+- Choisir une majeure si c'est sa première connexion.
+- Consulter uniquement ses notes.
+- Planifier son cursus en s'inscrivant aux matières facultatives ou en s'en désinscrivant.
 
 Un professeur peut:
 •  Connaitre les matières qui lui sont attribués.
