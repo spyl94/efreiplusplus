@@ -18,7 +18,6 @@ Un professeur peut:
 - Connaitre les matières qui lui sont attribués.
 - Afficher un relevé de note des matières qui lui sont attribués.
 - Ajouter des notes aux élèves des matières qui lui sont attribués.
-- Observer les alertes émises automatiquement par les élèves ayant 3 notes en dessous de la moyenne.
 
 Un administrateur peut:
 - Ajouter et retirer des élèves du système.
